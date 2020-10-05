@@ -2,7 +2,17 @@
     ViewData["Title"] = "Home Page";
 }
 
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @TempData["SuccessIndicator"]
+    <form class="col-xs-12" method="post" action="/Home/SubmitFile" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <input type="file" class="form-control" name="file" />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary col-xs-12">Submit</button>
+        </div>
+    </form>
 </div>
