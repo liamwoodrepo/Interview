@@ -18,12 +18,9 @@ namespace Interview_Web_API.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly ConnectionString _connectionString;
-        
-        private readonly IConfiguration _configuration;
 
-        public EmployeeController(IConfiguration configuration, ConnectionString connectionString)
+        public EmployeeController(ConnectionString connectionString)
         {
-            _configuration = configuration;
             _connectionString = connectionString;
         }
 
@@ -34,23 +31,17 @@ namespace Interview_Web_API.Controllers
 
             try
             {
-                if (employeeFile.Length > 0)
-                {
-                    employeeDocumentFilePath = Path.Combine(employeeDocumentFilePath, "employeeFile.txt");
+                //file checked for null value on form submit
+                employeeDocumentFilePath = Path.Combine(employeeDocumentFilePath, "employeeFile.txt");
 
-                    using (var stream = System.IO.File.Create(employeeDocumentFilePath))
-                    {
-                        await employeeFile.CopyToAsync(stream);
-                    }
-                }
-                else
+                using (var stream = System.IO.File.Create(employeeDocumentFilePath))
                 {
-                    return BadRequest(new { message = "Unable to process file, the file submitted contained to data." });
+                    await employeeFile.CopyToAsync(stream);
                 }
             }
             catch (Exception)
             {
-                //delete file
+                //Delete file if exists
                 if (System.IO.File.Exists(employeeDocumentFilePath))
                 {
                     System.IO.File.Delete(employeeDocumentFilePath);
@@ -76,10 +67,7 @@ namespace Interview_Web_API.Controllers
                 return BadRequest(new { message = "An error occured when processing employess file." });
             }
 
-
             return Ok();
-
         }
-        
     }
 }

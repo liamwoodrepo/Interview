@@ -19,8 +19,6 @@ namespace Interview_Web_API.Models
         {
         }
 
-        //private const string connectionString = "Data Source=DESKTOP-4P15GJ5\\MSSQLSERVER01;Initial Catalog=Interview;Integrated Security=True";
-        //"DefaultConnection": "Data Source=DESKTOP-4P15GJ5\\MSSQLSERVER01;Initial Catalog=Interview;Integrated Security=True"
         private const string connectionString = "Data Source=(localdb)\\Interview;Initial Catalog=Interview;Integrated Security=True";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

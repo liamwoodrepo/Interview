@@ -61,7 +61,7 @@ namespace Interview_Web_App.Controllers
             }
             catch (Exception)
             {
-                //delete file
+                //Delete file if exists
                 if (System.IO.File.Exists(employeeDocumentFilePath))
                 {
                     System.IO.File.Delete(employeeDocumentFilePath);
@@ -70,6 +70,7 @@ namespace Interview_Web_App.Controllers
                 return BadRequest(new { message = "Unable to process file, please try again." });
             }
 
+            //Pass file to API
             var client = new RestClient(_configuration.GetValue<string>("ApiUrl"));
 
             var addEmployeesRequest = new RestRequest("", Method.POST);
